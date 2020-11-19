@@ -1,5 +1,6 @@
 import "./App.css";
 import EnhancedCheckboxGroup from "./components/EnhancedCheckBoxGroup";
+import EnhancedCheckBox from "./components/EnhancedCheckBox";
 import { Component } from "react";
 
 class App extends Component {
@@ -10,6 +11,7 @@ class App extends Component {
       side1: undefined,
       side2: undefined,
       showSelection: false,
+      isDoublePortion: false,
     };
   }
 
@@ -29,6 +31,11 @@ class App extends Component {
       return newState;
     });
   }
+  toggleDoublePortion() {
+    this.setState((currentState) => ({
+      isDoublePortion: !currentState.isDoublePortion,
+    }));
+  }
 
   render() {
     const mains = [
@@ -47,12 +54,12 @@ class App extends Component {
       { id: "broccoli", value: "broccoli", label: "Broccoli" },
     ];
 
-    const { showSelection, main, side1, side2 } = this.state;
+    const { showSelection, main, side1, side2, isDoublePortion } = this.state;
 
     return (
       <div className="App">
         <h2>Monday</h2>
-        {showSelection && <p>{`${main} with ${side1} and ${side2}`}</p>}
+        {showSelection && <p>{`${main} with ${side1} and ${side2}`} { isDoublePortion ? '(Double Portion)' : ''} </p>}
         <div className="container">
           <div>
             <h3>Main</h3>
@@ -65,6 +72,9 @@ class App extends Component {
           <div>
             <h3>Side 2</h3>
             <EnhancedCheckboxGroup items={side2s} onChange={(value)=> this.itemSelected({side2: value})} />
+          </div>
+          <div className="double-portion">
+            <EnhancedCheckBox label="Double Portion" id="double" value={true} selected={this.state.isDoublePortion} onChange={() => this.toggleDoublePortion()}/>
           </div>
         </div>
        

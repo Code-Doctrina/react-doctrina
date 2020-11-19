@@ -25,7 +25,7 @@ export default class EnhancedCheckboxGroup  extends React.Component{
         value={item.value} 
         id={item.id} 
         selected={selectedItem === i}  
-        onChange = {() => this.setSelected(i)}
+        onChange = {() => {console.log("Change This"); this.setSelected(i)}}
         />)
   }
    
