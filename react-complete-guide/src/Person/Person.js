@@ -1,5 +1,5 @@
 import React from "react";
-import index from "./index.css";
+import classes from  "./index.css";
 
 const person = (props) => {
   const style ={
@@ -8,7 +8,7 @@ const person = (props) => {
     }
   }
   return (
-    <div className="Person">
+    <div className={classes.Person}>
       <p onClick={props.click}>
         I'm {props.name} and I am {props.age} years old!
       </p>
