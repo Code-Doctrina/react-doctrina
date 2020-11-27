@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import classes from  "./App.css";
-import Person from "./Person/Person";
-
+import classes from "./App.css";
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("[App.js] constructor");
+  }
   state = {
     persons: [
       { id: "89381", name: "Max", age: 28 },
@@ -12,6 +16,26 @@ class App extends Component {
     otherState: "Some Other Valuer",
     showPersons: false,
   };
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log("[App.js] getDerivedStateFromProps", props);
+  //   return state;
+  // }
+  componentWillMount() {
+    console.log("[Persons.js] componentWillMount ...");
+  }
+
+  componentDidMount() {
+    console.log("[Persons.js] componentDidMount ...");
+  }
+
+  componentDidUpdate() {
+    console.log("[Persons.js] componentDidUpdate ...");
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[Persons.js] shouldComponentUpdate ...");
+    return true;
+  }
 
   deletePersonHandler = (personIndex) => {
     // const persons = this.state.persons.slice();
@@ -64,66 +88,29 @@ class App extends Component {
   };
 
   render() {
-    // const style = {
-    //   backgroundColor: "green",
-    //   color: "white",
-    //   font: "inherit",
-    //   border: "1px solid blue",
-    //   padding: "8px",
-    //   cursor: "pointer",
-    //   // ":hover": { // Uses Radium
-    //   //   backgroundColor: "salmon",
-    //   //   color: "black",
-    //   // },
-    //   borderRadius: "2px;",
-    // };
-
+    console.log("[App.js] render");
     let persons = null;
-    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <Person
-                click={() => this.deletePersonHandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                changed={(event) => this.nameChangedHandler(event, person.id)}
-              />
-            );
-          })}
-        </div>
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler}
+        />
       );
-      btnClass = classes.Red;
-     
-      // style[":hover"] = {
-      //   backgroundColor: "lightred",
-      //   color: "black",
-      // };
     }
-
-    const assignedClassess = [];
-    if (this.state.persons.length <= 2) {
-      assignedClassess.push(classes.red); // classes  = ['red]
-    }
-
-    if (this.state.persons.length <= 1) {
-      assignedClassess.push(classes.bold); // Classes = ['red', 'bold]
-    }
-    // let classes = ['red', 'bold'].join(' ');
 
     return (
-        <div className={classes.App}>
-          <h1>Hi, I am a react app</h1>
-          <p className={assignedClassess.join(' ')}>This is really working!!</p>
-          <button className={btnClass} onClick={this.togglePersonsHandler}>
-            Toggle Persons
-          </button>
-          {persons}
-        </div>
+      <div className={classes.App}>
+        <Cockpit
+          title={this.props.appTitle}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler}
+        />
+        {persons}
+      </div>
     );
     //  return React.createElement('div', {className: 'App'},React.createElement('h1',null, 'Does this work now?'));
   }
