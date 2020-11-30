@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import Aux from '../../../hoc/Aux';
 import classes from "./index.css";
 
 class Person extends Component {
@@ -10,14 +11,21 @@ class Person extends Component {
     };
     console.log("[Person.js] rendering ...");
     return (
-      <div className={classes.Person}>
-        <p onClick={this.props.click}>
+     <Aux>
+        <p key="i1" onClick={this.props.click}>
           I'm {this.props.name} and I am {this.props.age} years old!
         </p>
-        <p>{this.props.children}</p>
-        <input type="text" onChange={this.props.changed} value={this.props.name} />
-        <input type="text" onChange={this.props.dob} />
-      </div>
+        <p key="i2">{this.props.children}</p>
+        <input 
+        key="i3" 
+        type="text"
+         onChange={this.props.changed} 
+        value={this.props.name} />
+        <input
+        key="i4" 
+        type="text" onChange={this.props.dob} />
+      {/* // </div> */}
+      </Aux>
     );
   }
 }
