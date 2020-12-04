@@ -105,12 +105,14 @@ class App extends Component {
 
     if (this.state.showPersons) {
       persons = (
-        <Persons
-          persons={this.state.persons}
-          clicked={this.deletePersonHandler}
-          changed={this.nameChangedHandler}
-          isAuthenicated={this.state.authenticated}
-        />
+        <div>
+          <Persons 
+          persons ={this.state.persons}
+          clicked = {this.deletePersonHandler}
+          changed = {this.nameChangedHandler}
+          />
+        </div>
+        
       );
     }
 
