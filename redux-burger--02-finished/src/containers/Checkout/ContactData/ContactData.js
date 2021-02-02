@@ -11,9 +11,7 @@ import {updateObject,checkValidity} from '../../../shared/utility';
 
 
 import {
-  purchaseBurger,
-  purchaseBurgerFail,
-  purchaseBurgerStart,
+  purchaseBurger
 } from '../../../store/actions/order';
 
 class ContactData extends Component {
